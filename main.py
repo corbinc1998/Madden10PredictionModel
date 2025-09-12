@@ -205,6 +205,71 @@ def test_playoff_simulation():
         traceback.print_exc()
 
 
+def run_monte_carlo_simulation():
+    """Run Monte Carlo playoff simulation with multiple iterations"""
+    json_file_path = get_json_file_path()
+    
+    if not json_file_path:
+        print("No data file provided. Exiting.")
+        return
+    
+    try:
+        # Load and process data
+        print(f"\nLoading data from: {json_file_path}")
+        raw_data = load_nfl_data(json_file_path)
+        
+        predictor = NFLGamePredictor(raw_data)
+        
+        print("Processing game data...")
+        predictor.process_data()
+        
+        print("\nCalculating team statistics...")
+        predictor.calculate_team_stats()
+        
+        print("\nTraining prediction models...")
+        predictor.train_models()
+        
+        # Get available seasons
+        available_seasons = sorted([int(s) for s in raw_data['seasons'].keys()])
+        print(f"\nAvailable seasons: {available_seasons}")
+        
+        # Let user choose season
+        season_choice = input(f"\nEnter season to simulate (or press Enter for latest season {max(available_seasons)}): ").strip()
+        
+        if season_choice:
+            try:
+                season = int(season_choice)
+                if season not in available_seasons:
+                    print(f"Season {season} not found. Using latest season {max(available_seasons)}")
+                    season = max(available_seasons)
+            except ValueError:
+                print("Invalid season number. Using latest season.")
+                season = max(available_seasons)
+        else:
+            season = max(available_seasons)
+        
+        # Get number of simulations
+        while True:
+            try:
+                num_sims = input("\nNumber of simulations to run (default 100): ").strip()
+                num_sims = int(num_sims) if num_sims else 100
+                if 1 <= num_sims <= 1000:
+                    break
+                else:
+                    print("Please enter a number between 1 and 1000.")
+            except ValueError:
+                print("Please enter a valid number.")
+        
+        # Run Monte Carlo simulation
+        playoff_sim = PlayoffSimulator(predictor)
+        results = playoff_sim.run_monte_carlo_simulation(season, num_sims)
+        
+    except Exception as e:
+        print(f"Error: {e}")
+        import traceback
+        traceback.print_exc()
+
+
 def main():
     """Main function with enhanced options"""
     print("NFL Game Predictor with Playoff Simulation")
@@ -212,11 +277,12 @@ def main():
     
     print("\nChoose an option:")
     print("1. Regular season predictions only")
-    print("2. Full playoff simulation")
-    print("3. Both regular season and playoff simulation")
-    print("4. Test playoff simulation (debug mode)")
+    print("2. Single playoff simulation")
+    print("3. Both regular season and single playoff simulation")
+    print("4. Monte Carlo playoff simulation (multiple runs)")
+    print("5. Test playoff simulation (debug mode)")
     
-    choice = input("Enter your choice (1-4): ").strip()
+    choice = input("Enter your choice (1-5): ").strip()
     
     if choice == "1":
         run_regular_season_predictions()
@@ -225,9 +291,11 @@ def main():
     elif choice == "3":
         run_both_predictions()
     elif choice == "4":
+        run_monte_carlo_simulation()
+    elif choice == "5":
         test_playoff_simulation()
     else:
-        print("Invalid choice. Please run again and select 1-4.")
+        print("Invalid choice. Please run again and select 1-5.")
 
 
 if __name__ == "__main__":
