@@ -13,14 +13,45 @@ class PlayoffSimulator:
         print(f"\nRunning Monte Carlo Simulation: {num_simulations} simulations")
         print("=" * 60)
         
+        # First, generate the playoff bracket that will be used for all simulations
+        print("Generating projected final standings...")
+        standings = self.get_projected_final_standings(season, quiet=False)
+        
+        if standings.empty:
+            print("No standings data available!")
+            return None
+        
+        print("\nDetermining playoff teams from projected standings...")
+        playoff_teams = self.determine_playoff_teams(standings)
+        
+        # Check if we have enough teams
+        if len(playoff_teams['AFC']) < 6 or len(playoff_teams['NFC']) < 6:
+            print(f"\nWarning: Not enough playoff teams found!")
+            print(f"AFC: {len(playoff_teams['AFC'])} teams, NFC: {len(playoff_teams['NFC'])} teams")
+            return None
+        
+        # Display playoff bracket that will be used for all simulations
+        print("\nPlayoff Bracket (Used for All Simulations):")
+        print("=" * 50)
+        for conference in ['AFC', 'NFC']:
+            print(f"\n{conference} Conference:")
+            for team_info in playoff_teams[conference]:
+                print(f"  {team_info['seed']}. {team_info['team']} ({team_info['record']}) - {team_info['type']}")
+        
+        # Now run the simulations
+        print(f"\n{'='*20} STARTING SIMULATIONS {'='*20}")
+        
         simulation_results = []
         champion_counts = {}
         super_bowl_appearances = {}
+        super_bowl_matchups = {}  
         
         for sim in range(num_simulations):
-            print(f"\n--- Simulation {sim + 1}/{num_simulations} ---")
+            if sim % 10 == 0 or sim < 5:  # Show progress for first 5 and every 10th simulation
+                print(f"Simulation {sim + 1}/{num_simulations}...", end=" ")
             
-            results = self.simulate_playoffs(season, add_noise=True)
+            # Run simulation with the same playoff bracket but with noise
+            results = self._simulate_playoffs_with_bracket(playoff_teams, season, add_noise=True)
             
             if results:
                 simulation_results.append(results)
@@ -28,15 +59,51 @@ class PlayoffSimulator:
                 champion = results['champion']
                 champion_counts[champion] = champion_counts.get(champion, 0) + 1
                 
+                # Track Super Bowl appearances
                 for team in results['super_bowl_teams']:
                     super_bowl_appearances[team] = super_bowl_appearances.get(team, 0) + 1
                 
-                print(f"Champion: {champion}")
+                # Track Super Bowl matchups
+                afc_team = results['super_bowl_teams'][0]
+                nfc_team = results['super_bowl_teams'][1]
+                matchup = f"{afc_team} vs {nfc_team}"
+                super_bowl_matchups[matchup] = super_bowl_matchups.get(matchup, 0) + 1
+                
+                if sim % 10 == 0 or sim < 5:
+                    print(f"Champion: {champion}")
         
-        self._display_monte_carlo_results(champion_counts, super_bowl_appearances, num_simulations)
+        # Display summary statistics
+        self._display_monte_carlo_results(champion_counts, super_bowl_appearances, super_bowl_matchups, num_simulations)
+        
         return simulation_results
     
-    def _display_monte_carlo_results(self, champion_counts, super_bowl_appearances, num_simulations):
+    def _simulate_playoffs_with_bracket(self, playoff_teams, season, add_noise=True):
+        """Simulate playoffs with a predetermined bracket"""
+        try:
+            # Wild Card Round
+            wild_card_winners = self._simulate_wild_card_round(playoff_teams, season, add_noise)
+            
+            # Divisional Round
+            divisional_winners = self._simulate_divisional_round(playoff_teams, wild_card_winners, season, add_noise)
+            
+            # Conference Championships
+            super_bowl_teams = self._simulate_conference_championships(playoff_teams, divisional_winners, season, add_noise)
+            
+            # Super Bowl
+            champion = self._simulate_super_bowl(super_bowl_teams, season, add_noise)
+            
+            return {
+                'playoff_teams': playoff_teams,
+                'wild_card_winners': wild_card_winners,
+                'divisional_winners': divisional_winners,
+                'super_bowl_teams': super_bowl_teams,
+                'champion': champion
+            }
+            
+        except Exception as e:
+            return None
+    
+    def _display_monte_carlo_results(self, champion_counts, super_bowl_appearances, super_bowl_matchups, num_simulations):
         """Display Monte Carlo simulation summary"""
         print(f"\n{'='*25} MONTE CARLO RESULTS {'='*25}")
         print(f"Based on {num_simulations} simulations:\n")
@@ -57,6 +124,15 @@ class PlayoffSimulator:
             most_likely_champion = sorted_champions[0][0]
             win_percentage = (sorted_champions[0][1] / num_simulations) * 100
             print(f"\nMost Likely Champion: {most_likely_champion} ({win_percentage:.1f}%)")
+            print("\nAll Super Bowl Matchups:")
+            sorted_matchups = sorted(super_bowl_matchups.items(), key=lambda x: x[1], reverse=True)
+            for matchup, count in sorted_matchups:
+                percentage = (count / num_simulations) * 100
+                print(f"  {matchup}: {count}/{num_simulations} ({percentage:.1f}%)")
+        if sorted_matchups:
+            most_likely_matchup = sorted_matchups[0][0]
+            matchup_percentage = (sorted_matchups[0][1] / num_simulations) * 100
+            print(f"Most Likely Super Bowl: {most_likely_matchup} ({matchup_percentage:.1f}%)")
     
     def get_projected_final_standings(self, season, quiet=False):
         """Calculate projected final standings: completed games + predicted results"""
@@ -273,16 +349,15 @@ class PlayoffSimulator:
             return base_prediction
         
         base_prob = base_prediction['home_win_probability']
-        noise = np.random.normal(0, 0.02)
-        noisy_prob = np.clip(base_prob + noise, 0.1, 0.9)
         
-        winner = home_team if noisy_prob > 0.5 else away_team
-        confidence = max(noisy_prob, 1 - noisy_prob)
+        # Use probabilistic sampling instead of just adding noise
+        winner = home_team if np.random.random() < base_prob else away_team
+        confidence = max(base_prob, 1 - base_prob)
         
         return {
             'home_team': home_team,
             'away_team': away_team,
-            'home_win_probability': noisy_prob,
+            'home_win_probability': base_prob,
             'winner': winner,
             'confidence': confidence
         }
