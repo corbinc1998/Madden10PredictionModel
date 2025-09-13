@@ -1,6 +1,20 @@
 import pandas as pd
 import numpy as np
 import json
+
+class NumpyEncoder(json.JSONEncoder):
+    """ Custom encoder for numpy data types """
+    def default(self, obj):
+        if isinstance(obj, (np.integer,)):
+            return int(obj)
+        elif isinstance(obj, (np.floating,)):
+            return float(obj)
+        elif isinstance(obj, (np.bool_,)):
+            return bool(obj)
+        elif isinstance(obj, np.ndarray):
+            return obj.tolist()
+        return super(NumpyEncoder, self).default(obj)
+
 import pickle
 import os
 from datetime import datetime, timedelta
@@ -100,7 +114,9 @@ class AdaptiveNFLPredictor:
     def save_config(self):
         """Save current configuration"""
         with open(self.config_path, 'w') as f:
-            json.dump(self.config, f, indent=2)
+            json.dump(self.config, f, indent=2, cls=NumpyEncoder)
+
+
     
     def load_most_recent_predictions(self):
         """Load the most recent predictions from the predictions directory"""
@@ -132,6 +148,7 @@ class AdaptiveNFLPredictor:
             return os.path.join(self.predictions_dir, "initial_predictions.json")
         else:
             return os.path.join(self.predictions_dir, f"after_week_{update_number}_predictions.json")
+
     
     def save_predictions_with_timestamp(self, predictions_data=None):
         """Save predictions to timestamped file"""
@@ -142,7 +159,8 @@ class AdaptiveNFLPredictor:
         
         # Save the predictions
         with open(filename, 'w') as f:
-            json.dump(predictions_data, f, indent=2)
+            json.dump(predictions_data, f, indent=2, cls=NumpyEncoder)
+
         
         # Update config with filename
         if filename not in self.config.get('prediction_files', []):
@@ -170,7 +188,8 @@ class AdaptiveNFLPredictor:
                         'home_win': 1 if game['homeScore'] > game['awayScore'] else 0,
                         'game_id': game['id'],
                         'is_playoff': game.get('isPlayoff', False),
-                        'date': game.get('date', '')
+                        'date': game.get('date', ''),
+                        'completed': game.get('completed', False)
                     }
                     all_games.append(game_info)
         
@@ -512,8 +531,9 @@ class AdaptiveNFLPredictor:
         
         # Check stored predictions against actual results
         for game_id, pred_data in self.stored_predictions.items():
-            if pred_data['evaluated']:
-                continue
+            if pred_data.get('evaluated', True):  # default True means "skip" if not a normal game prediction
+                     continue
+
                 
             # Look for actual result in games_df
             actual_game = self.games_df[self.games_df['game_id'] == game_id]
@@ -641,9 +661,10 @@ class AdaptiveNFLPredictor:
             for model_name in self.config['model_weights']:
                 old_weight = self.config['model_weights'][model_name]
                 new_weight = new_weights[model_name]
-                self.config['model_weights'][model_name] = (
-                    (1 - learning_rate) * old_weight + learning_rate * new_weight
-                )
+                self.config['model_weights'][model_name] = float(
+            (1 - learning_rate) * old_weight + learning_rate * new_weight
+        )
+
         
         print("Updated model weights:", self.config['model_weights'])
     
@@ -798,15 +819,21 @@ def run_adaptive_predictor(json_file_path):
     print("Training initial models...")
     predictor.train_models()
     
-    # Check if this is a weekly update or initial run
+   # Check if this is a weekly update or initial run
     if predictor.config['update_counter'] == 0:
-        print("Generating initial predictions...")
-        predictions = predictor.predict_scheduled_games()
-        print(f"Generated initial predictions for {len(predictions)} games")
-        print(f"Saved to: {predictor.get_prediction_filename(0)}")
+        # Count completed games
+        completed_games = predictor.games_df[predictor.games_df['completed'] == True]
+
+        if completed_games.empty:
+            print("No completed games yet. Models trained, but predictions will start after Week 1.")
+            predictions = None
+        else:
+            print("First completed week detected — generating predictions...")
+            predictions = predictor.weekly_update_cycle()
     else:
         print("Performing weekly update...")
         predictions = predictor.weekly_update_cycle()
+
     
     # Show performance summary
     predictor.get_performance_summary()

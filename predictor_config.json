@@ -1,0 +1,16 @@
+{
+  "model_weights": {
+    "random_forest": 0.39337190241728154,
+    "gradient_boost": 0.3484879351762536,
+    "logistic_regression": 0.2581401624064649
+  },
+  "feature_weights": {},
+  "learning_rate": 0.1,
+  "min_games_for_update": 5,
+  "performance_window": 20,
+  "last_update": "2025-09-13T10:59:11.844553",
+  "total_predictions": 16,
+  "correct_predictions": 12,
+  "update_counter": 1,
+  "prediction_files": []
+}
