@@ -14,6 +14,10 @@ All games are streamed live and uploaded to YouTube, and **results are updated i
 
 ---
 
+## I AM CURRENTLY WORKING ON IMPLEMENTING TEAM STATS FROM ALL 5 SEASONS, I MAY REPREDICT
+
+---
+
 ## AI Prediction For Week 2 (Current Week)
 
 **Games Evaluated:** 16  
