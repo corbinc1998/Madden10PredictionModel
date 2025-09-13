@@ -69,7 +69,6 @@ All games are streamed live and uploaded to YouTube, and **results are updated i
 | tb vs cle | tb | 53.7% | 65.0% | +11.3 pp |
 
 
----
 
 ---
 
