@@ -4,7 +4,7 @@ NFL Game Predictor with Playoff Simulation
 Main application entry point
 """
 
-from models import NFLGamePredictor
+from adaptive_models import AdaptiveNFLPredictor, run_adaptive_predictor
 from playoffs import PlayoffSimulator
 from utils import (
     get_json_file_path, 
@@ -28,7 +28,7 @@ def run_regular_season_predictions():
         print(f"\nLoading data from: {json_file_path}")
         raw_data = load_nfl_data(json_file_path)
         
-        predictor = NFLGamePredictor(raw_data)
+        predictor, predictions = run_adaptive_predictor(json_file_path)
         
         print("Processing game data...")
         predictor.process_data()
@@ -40,8 +40,8 @@ def run_regular_season_predictions():
         predictor.train_models()
         
         print("\nPredicting upcoming games...")
-        predictions = predictor.predict_latest_season_games()
-        latest_season = predictor.find_latest_season()
+        predictions = predictor.predict_scheduled_games_and_playoffs()
+        latest_season = max(int(s) for s in predictor.raw_data['seasons'].keys())
         
         if not display_predictions(predictions, latest_season):
             # If no upcoming games, offer to simulate playoffs
@@ -70,16 +70,16 @@ def run_playoff_simulation():
         print(f"\nLoading data from: {json_file_path}")
         raw_data = load_nfl_data(json_file_path)
         
-        predictor = NFLGamePredictor(raw_data)
+        predictor, predictions = run_adaptive_predictor(json_file_path)
         
-        print("Processing game data...")
-        predictor.process_data()
+        # print("Processing game data...")
+        # predictor.process_data()
         
-        print("\nCalculating team statistics...")
-        predictor.calculate_team_stats()
+        # print("\nCalculating team statistics...")
+        # predictor.calculate_team_stats()
         
-        print("\nTraining prediction models...")
-        predictor.train_models()
+        # print("\nTraining prediction models...")
+        # predictor.train_models()
         
         # Get available seasons
         available_seasons = sorted([int(s) for s in raw_data['seasons'].keys()])
@@ -110,8 +110,8 @@ def run_playoff_simulation():
         # Ask if user wants to see regular season predictions too
         show_regular = input("\nShow remaining regular season game predictions? (y/n): ").strip().lower()
         if show_regular == 'y':
-            predictions = predictor.predict_latest_season_games()
-            latest_season = predictor.find_latest_season()
+            predictions = predictor.predict_scheduled_games_and_playoffs()
+            latest_season = max(int(s) for s in predictor.raw_data['seasons'].keys())
             display_predictions(predictions, latest_season)
         
     except Exception as e:
@@ -133,7 +133,7 @@ def run_both_predictions():
         print(f"\nLoading data from: {json_file_path}")
         raw_data = load_nfl_data(json_file_path)
         
-        predictor = NFLGamePredictor(raw_data)
+        predictor, predictions = run_adaptive_predictor(json_file_path)
         
         print("Processing game data...")
         predictor.process_data()
@@ -144,11 +144,11 @@ def run_both_predictions():
         print("\nTraining prediction models...")
         predictor.train_models()
         
-        latest_season = predictor.find_latest_season()
+        latest_season = max(int(s) for s in predictor.raw_data['seasons'].keys())
         
         # Show regular season predictions first
         print("\nPredicting remaining regular season games...")
-        predictions = predictor.predict_latest_season_games()
+        predictions = predictor.predict_scheduled_games_and_playoffs()
         
         if not predictions.empty:
             print(f"\nRemaining Regular Season Games (Season {latest_season}):")

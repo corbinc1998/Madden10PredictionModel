@@ -147,7 +147,7 @@ class PlayoffSimulator:
         if not quiet:
             print(f"Found {len(completed_games)} completed regular season games")
         
-        remaining_predictions = self.predictor.predict_latest_season_games()
+        remaining_predictions = self.predictor.predict_scheduled_games()
         
         if not quiet:
             print(f"Predicting {len(remaining_predictions)} remaining games")
@@ -343,7 +343,7 @@ class PlayoffSimulator:
     
     def _predict_game_with_noise(self, home_team, away_team, season, add_noise=False):
         """Predict game outcome with optional noise for Monte Carlo simulation"""
-        base_prediction = self.predictor.predict_game_outcome(home_team, away_team, season)
+        base_prediction = self.predictor.predict_game_outcome(home_team, away_team, season, is_playoff=True)
         
         if not add_noise:
             return base_prediction
