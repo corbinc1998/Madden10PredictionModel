@@ -14,7 +14,7 @@ All games are streamed live and uploaded to YouTube, and **results are updated i
 
 ---
 
-## AI Prediction Example
+## AI Prediction For Week 2 (Current Week)
 
 **Games Evaluated:** 16  
 **Correct Predictions:** 12  
