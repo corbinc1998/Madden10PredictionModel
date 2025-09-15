@@ -390,35 +390,57 @@ class PlayoffSimulator:
         return wild_card_winners
     
     def _simulate_divisional_round(self, playoff_teams, wild_card_winners, season, add_noise=False):
-        """Simulate Divisional Round"""
+        """Simulate Divisional Round with correct NFL bracket logic"""
         if not add_noise:
             print(f"\n{'='*20} DIVISIONAL ROUND {'='*20}")
         divisional_winners = {'AFC': [], 'NFC': []}
         
         for conference in ['AFC', 'NFC']:
-            teams = {team['seed']: team['team'] for team in playoff_teams[conference]}
-            wc_winners = wild_card_winners[conference]
+            # Get the seeds for all teams
+            teams_by_seed = {team['seed']: team['team'] for team in playoff_teams[conference]}
             
+            # Get original seeds for wild card winners
             original_seeds = {}
             for team_info in playoff_teams[conference]:
                 original_seeds[team_info['team']] = team_info['seed']
             
-            wc_seeds = [(original_seeds[team], team) for team in wc_winners]
-            wc_seeds.sort()
+            wc_winners = wild_card_winners[conference]
+            
+            # Get seeds of wild card winners and sort them
+            wc_winner_seeds = []
+            for team in wc_winners:
+                seed = original_seeds[team]
+                wc_winner_seeds.append((seed, team))
+            
+            # Sort by seed (lowest seed number = higher ranking)
+            wc_winner_seeds.sort(key=lambda x: x[0])
             
             if not add_noise:
                 print(f"\n{conference} Divisional Games:")
+                print(f"Wild card winners advancing: {[f'#{seed} {team}' for seed, team in wc_winner_seeds]}")
+            
+            # NFL Divisional Round Rules:
+            # - #1 seed plays the LOWEST remaining seed
+            # - #2 seed plays the HIGHEST remaining seed
+            
+            # #1 seed vs lowest remaining seed
+            seed_1_team = teams_by_seed[1]
+            lowest_seed, lowest_team = wc_winner_seeds[-1]  # Last in sorted list = highest seed number = lowest ranking
             
             if not add_noise:
-                print(f"Predicting: #{1} {teams[1]} vs #{wc_seeds[0][0]} {wc_seeds[0][1]}")
-            game1 = self._predict_game_with_noise(teams[1], wc_seeds[0][1], season, add_noise)
+                print(f"Game 1: #{1} {seed_1_team} vs #{lowest_seed} {lowest_team}")
+            game1 = self._predict_game_with_noise(seed_1_team, lowest_team, season, add_noise)
             if not add_noise:
                 print(f"Result: {game1['winner']} wins (Confidence: {game1['confidence']:.1%})")
             divisional_winners[conference].append(game1['winner'])
             
+            # #2 seed vs highest remaining seed  
+            seed_2_team = teams_by_seed[2]
+            highest_seed, highest_team = wc_winner_seeds[0]  # First in sorted list = lowest seed number = highest ranking
+            
             if not add_noise:
-                print(f"Predicting: #{2} {teams[2]} vs #{wc_seeds[1][0]} {wc_seeds[1][1]}")
-            game2 = self._predict_game_with_noise(teams[2], wc_seeds[1][1], season, add_noise)
+                print(f"Game 2: #{2} {seed_2_team} vs #{highest_seed} {highest_team}")
+            game2 = self._predict_game_with_noise(seed_2_team, highest_team, season, add_noise)
             if not add_noise:
                 print(f"Result: {game2['winner']} wins (Confidence: {game2['confidence']:.1%})")
             divisional_winners[conference].append(game2['winner'])
