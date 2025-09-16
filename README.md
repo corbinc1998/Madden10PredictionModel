@@ -18,6 +18,7 @@ All games are streamed live and uploaded to YouTube, and **results are updated i
 
 ## AI Prediction For Week 2 (Current Week)
 
+**After Week 1:**
 **Games Evaluated:** 16  
 **Correct Predictions:** 12  
 **Accuracy:** 75%  
