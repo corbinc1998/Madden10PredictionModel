@@ -118,25 +118,51 @@ class AdaptiveNFLPredictor:
 
 
     
-    def load_most_recent_predictions(self):
-        """Load the most recent predictions from the predictions directory"""
+    def select_prediction_file_to_load(self):
+        """Let user manually select which prediction file to load"""
         import glob
         
-        # Get all prediction files
         prediction_files = glob.glob(os.path.join(self.predictions_dir, "*.json"))
         
         if not prediction_files:
+            print("No prediction files found.")
+            return None
+        
+        print("\nAvailable prediction files:")
+        for i, file_path in enumerate(prediction_files, 1):
+            filename = os.path.basename(file_path)
+            print(f"{i}. {filename}")
+        
+        while True:
+            try:
+                choice = input(f"\nSelect file to load (1-{len(prediction_files)}) or 0 for most recent: ")
+                choice = int(choice)
+                
+                if choice == 0:
+                    # Use the existing logic for most recent
+                    most_recent_file = max(prediction_files, key=os.path.getctime)
+                    return most_recent_file
+                elif 1 <= choice <= len(prediction_files):
+                    return prediction_files[choice - 1]
+                else:
+                    print("Invalid choice. Please try again.")
+            except ValueError:
+                print("Please enter a number.")
+
+    def load_most_recent_predictions(self):
+        """Load predictions with user selection option"""
+        selected_file = self.select_prediction_file_to_load()
+        
+        if selected_file is None:
             self.stored_predictions = {}
             return
         
-        # Find the most recent prediction file
-        most_recent_file = max(prediction_files, key=os.path.getctime)
-        
         try:
-            with open(most_recent_file, 'r') as f:
+            with open(selected_file, 'r') as f:
                 self.stored_predictions = json.load(f)
-            print(f"Loaded predictions from: {os.path.basename(most_recent_file)}")
+            print(f"Loaded predictions from: {os.path.basename(selected_file)}")
         except (FileNotFoundError, json.JSONDecodeError):
+            print(f"Error loading {selected_file}")
             self.stored_predictions = {}
     
     def get_prediction_filename(self, update_number=None):
@@ -161,12 +187,14 @@ class AdaptiveNFLPredictor:
         with open(filename, 'w') as f:
             json.dump(predictions_data, f, indent=2, cls=NumpyEncoder)
 
-        
         # Update config with filename
         if filename not in self.config.get('prediction_files', []):
             if 'prediction_files' not in self.config:
                 self.config['prediction_files'] = []
             self.config['prediction_files'].append(filename)
+            
+    
+            self.save_config()
         
         print(f"Saved predictions to: {os.path.basename(filename)}")
         return filename
@@ -699,7 +727,7 @@ class AdaptiveNFLPredictor:
         self._show_prediction_changes_summary(new_predictions)
         
         print(f"Updated predictions for {len(new_predictions)} games")
-        
+        self.save_config()
         return new_predictions
     
     def _show_prediction_changes_summary(self, new_predictions):
