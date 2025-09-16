@@ -35,11 +35,11 @@ All games are streamed live and uploaded to YouTube, and **results are updated i
 - nyg vs jax → **nyg win** (53.4%)  ❌
 - oak vs kc → **oak win** (50.6%)  ❌
 - pit vs bal → **bal win** (57.1%)  ✅
-- sd vs hou → **sd win** (65.7%)  
+- sd vs hou → **sd win** (65.7%)  ✅
 - sea vs stl → **stl win** (54.8%)  ❌
 - sf vs dal → **dal win** (55.6%)  ❌
-- tb vs cle → **tb win** (65.0%)  
-- was vs phi → **was win** (63.2%)  
+- tb vs cle → **tb win** (65.0%)  ✅
+- was vs phi → **was win** (63.2%)  ❌
 
 ---
 
