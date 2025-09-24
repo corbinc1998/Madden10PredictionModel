@@ -186,102 +186,80 @@ This section repeats the **entire Week 1 prediction slate** for easy comparison 
 
 ---
 
-## Week 3 Prediction Comparison (After Week 1 vs After Week 2)
+## Week 3 Prediction Evolution
 
-### Predictions That Changed Winner:
+### Initial Week 3 Predictions (After Week 1)
+- Buffalo vs Baltimore → **Buffalo win** (50.4%)
+- Washington vs St. Louis → **Washington win** (52.0%)
+- Pittsburgh vs Jacksonville → **Pittsburgh win** (55.1%)
+- Houston vs New England → **Houston win** (54.6%)
+- Atlanta vs Tampa Bay → **Atlanta win** (61.6%)
+- Tennessee vs NY Giants → **Tennessee win** (62.2%)
+- Green Bay vs Chicago → **Green Bay win** (57.3%)
+- Philadelphia vs San Francisco → **San Francisco win** (50.4%)
+- Arizona vs Dallas → **Arizona win** (60.1%)
+- San Diego vs Denver → **Denver win** (60.5%)
+- Detroit vs Seattle → **Detroit win** (57.7%)
+- Miami vs Minnesota → **Minnesota win** (56.6%)
+- NY Jets vs Kansas City → **Kansas City win** (54.6%)
+- Cincinnati vs Indianapolis → **Cincinnati win** (60.9%)
+
+### Updated Week 3 Predictions (After Week 2)
+- Buffalo vs Baltimore → **Baltimore win** (50.8%)
+- Washington vs St. Louis → **Washington win** (64.0%)
+- Pittsburgh vs Jacksonville → **Pittsburgh win** (50.5%)
+- Houston vs New England → **Houston win** (59.5%)
+- Atlanta vs Tampa Bay → **Atlanta win** (61.0%)
+- Tennessee vs NY Giants → **Tennessee win** (58.7%)
+- Green Bay vs Chicago → **Green Bay win** (53.2%)
+- Philadelphia vs San Francisco → **San Francisco win** (55.2%)
+- Arizona vs Dallas → **Dallas win** (57.1%)
+- San Diego vs Denver → **San Diego win** (55.2%)
+- Detroit vs Seattle → **Seattle win** (55.2%)
+- Miami vs Minnesota → **Minnesota win** (62.7%)
+- NY Jets vs Kansas City → **Kansas City win** (58.4%)
+- Cincinnati vs Indianapolis → **Cincinnati win** (57.6%)
+
+### Final Week 3 Predictions (Most Recent Update)
+- Buffalo vs Baltimore → **Baltimore win** (50.8%)
+- Washington vs St. Louis → **Washington win** (52.0%)
+- Pittsburgh vs Jacksonville → **Pittsburgh win** (55.1%)
+- Houston vs New England → **Houston win** (54.6%)
+- Atlanta vs Tampa Bay → **Atlanta win** (61.6%)
+- Tennessee vs NY Giants → **Tennessee win** (62.2%)
+- Green Bay vs Chicago → **Green Bay win** (57.3%)
+- Philadelphia vs San Francisco → **San Francisco win** (50.4%)
+- Arizona vs Dallas → **Arizona win** (60.1%)
+- San Diego vs Denver → **Denver win** (60.5%)
+- Detroit vs Seattle → **Detroit win** (57.7%)
+- Miami vs Minnesota → **Minnesota win** (56.6%)
+- NY Jets vs Kansas City → **Kansas City win** (54.6%)
+- Cincinnati vs Indianapolis → **Cincinnati win** (60.9%)
+
+---
+
+## Week 3 Prediction Changes Summary
+
+### Predictions That Flipped Winners (After Week 1 → After Week 2)
 | Matchup | After Week 1 | After Week 2 | Change |
 |---------|-------------|-------------|---------|
-| Buffalo vs Baltimore | BUF (50.4%) | BAL (56.6%) | Flipped to BAL |
-| Pittsburgh vs Jacksonville | PIT (55.1%) | JAX (54.4%) | Flipped to JAX |
-| Philadelphia vs San Francisco | SF (50.4%) | PHI (53.3%) | Flipped to PHI |
-| Arizona vs Dallas | ARI (60.1%) | DAL (57.4%) | Flipped to DAL |
-| NY Jets vs Kansas City | KC (54.6%) | NYJ (51.0%) | Flipped to NYJ |
-| Green Bay vs Chicago | GB (57.3%) | CHI (51.9%) | Flipped to CHI |
+| Buffalo vs Baltimore | BUF (50.4%) | BAL (50.8%) | Flipped to BAL |
+| Detroit vs Seattle | DET (57.7%) | SEA (55.2%) | Flipped to SEA |
+| Arizona vs Dallas | ARI (60.1%) | DAL (57.1%) | Flipped to DAL |
+| San Diego vs Denver | DEN (60.5%) | SD (55.2%) | Flipped to SD |
 
-### Same Winner, Different Confidence:
-| Matchup | Winner | After Week 1 | After Week 2 | Δ Confidence |
-|---------|--------|-------------|-------------|--------------|
-| Washington vs St. Louis | WAS | 52.0% | 56.6% | +4.6 pp |
-| Houston vs New England | HOU | 54.6% | 56.2% | +1.6 pp |
-| Atlanta vs Tampa Bay | ATL | 61.6% | 64.6% | +3.0 pp |
-| Tennessee vs NY Giants | TEN | 62.2% | 56.3% | -5.9 pp |
-| San Diego vs Denver | DEN | 60.5% | 51.4% | -9.1 pp |
-| Detroit vs Seattle | DET | 57.7% | 58.1% | +0.4 pp |
-| Miami vs Minnesota | MIN | 56.6% | 62.2% | +5.6 pp |
-| Cincinnati vs Indianapolis | CIN | 60.9% | 53.3% | -7.6 pp |
+**Note:** The most recent predictions appear to have reverted some changes, suggesting the model may have oscillated between different assessments.
 
-## Final Week 3 Predictions (After Week 2 Adjustments)
+### Significant Confidence Changes
+| Matchup | Winner | Initial | After Week 2 | Final | Net Change |
+|---------|--------|---------|-------------|-------|------------|
+| Washington vs St. Louis | WAS | 52.0% | 64.0% | 52.0% | 0.0 pp |
+| Tennessee vs NY Giants | TEN | 62.2% | 58.7% | 62.2% | 0.0 pp |
+| Miami vs Minnesota | MIN | 56.6% | 62.7% | 56.6% | 0.0 pp |
+| NY Jets vs Kansas City | KC | 54.6% | 58.4% | 54.6% | 0.0 pp |
 
-- Buffalo vs Baltimore → **Baltimore win** (56.6%)
-- Washington vs St. Louis → **Washington win** (56.6%)
-- Pittsburgh vs Jacksonville → **Jacksonville win** (54.4%)
-- Houston vs New England → **Houston win** (56.2%)
-- Atlanta vs Tampa Bay → **Atlanta win** (64.6%)
-- Tennessee vs NY Giants → **Tennessee win** (56.3%)
-- Green Bay vs Chicago → **Chicago win** (51.9%)
-- Philadelphia vs San Francisco → **Philadelphia win** (53.3%)
-- Arizona vs Dallas → **Dallas win** (57.4%)
-- San Diego vs Denver → **Denver win** (51.4%)
-- Detroit vs Seattle → **Detroit win** (58.1%)
-- Miami vs Minnesota → **Minnesota win** (62.2%)
-- NY Jets vs Kansas City → **NY Jets win** (51.0%)
-- Cincinnati vs Indianapolis → **Cincinnati win** (53.3%)
-
-### Key Week 3 Observations:
-- **Most Volatile Predictions:** 6 games flipped winners after Week 2 results
-- **Biggest Confidence Drop:** Denver over San Diego fell 9.1 percentage points
-- **Highest Confidence:** Atlanta over Tampa Bay (64.6%)
-- **Closest Games:** NY Jets vs Kansas City (51.0%), Green Bay vs Chicago (51.9%)
-- **Model Learning:** Week 2's upsets significantly impacted road team confidence
-
----
-
-## Prediction Accuracy Summary
-- **Week 1 Accuracy:** 75% (12/16)
-- **Week 2 Accuracy:** 43.8% (7/16)
-- **Overall Accuracy Through Week 2:** 59.4% (19/32)
-- **Model Evolution:** Ensemble weights have stabilized with Random Forest maintaining slight edge
-
-### Week 2 Analysis
-Week 2 proved challenging for the model with several upset results:
-- **Biggest Upsets:** Washington (63.2% confidence) lost to Philadelphia, Denver (61.3% confidence) lost to New England
-- **Model Struggles:** Road favorites performed poorly (3-6 record for away teams predicted to win)
-- **Defensive Adjustments:** Several games had scoring patterns that differed significantly from recent form
-
-## Final Week 3 Predictions (After Week 2 Adjustments)
-
-- Buffalo vs Baltimore → **Baltimore win** (56.6%)
-- Washington vs St. Louis → **Washington win** (56.6%)
-- Pittsburgh vs Jacksonville → **Jacksonville win** (54.4%)
-- Houston vs New England → **Houston win** (56.2%)
-- Atlanta vs Tampa Bay → **Atlanta win** (64.6%)
-- Tennessee vs NY Giants → **Tennessee win** (56.3%)
-- Green Bay vs Chicago → **Chicago win** (51.9%)
-- Philadelphia vs San Francisco → **Philadelphia win** (53.3%)
-- Arizona vs Dallas → **Dallas win** (57.4%)
-- San Diego vs Denver → **Denver win** (51.4%)
-- Detroit vs Seattle → **Detroit win** (58.1%)
-- Miami vs Minnesota → **Minnesota win** (62.2%)
-- NY Jets vs Kansas City → **NY Jets win** (51.0%)
-- Cincinnati vs Indianapolis → **Cincinnati win** (53.3%)
-
-### Key Week 3 Observations:
-- **Most Volatile Predictions:** 6 games flipped winners after Week 2 results
-- **Biggest Confidence Drop:** Denver over San Diego fell 9.1 percentage points
-- **Highest Confidence:** Atlanta over Tampa Bay (64.6%)
-- **Closest Games:** NY Jets vs Kansas City (51.0%), Green Bay vs Chicago (51.9%)
-- **Model Learning:** Week 2's upsets significantly impacted road team confidence
-
----
-
-## Prediction Accuracy Summary
-- **Week 1 Accuracy:** 75% (12/16)
-- **Week 2 Accuracy:** 43.8% (7/16)
-- **Overall Accuracy Through Week 2:** 59.4% (19/32)
-- **Model Evolution:** Ensemble weights have stabilized with Random Forest maintaining slight edge
-
-### Week 2 Analysis
-Week 2 proved challenging for the model with several upset results:
-- **Biggest Upsets:** Washington (63.2% confidence) lost to Philadelphia, Denver (61.3% confidence) lost to New England
-- **Model Struggles:** Road favorites performed poorly (3-6 record for away teams predicted to win)
-- **Defensive Adjustments:** Several games had scoring patterns that differed significantly from recent form
+### Model Performance Tracking
+- **After Week 1:** 75% accuracy (12/16)
+- **After Week 2:** 43.8% accuracy (7/16)
+- **Overall Through Week 2:** 59.4% accuracy (19/32)
+- **Current Update Number:** 2
