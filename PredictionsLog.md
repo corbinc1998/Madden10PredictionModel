@@ -220,8 +220,8 @@ This section repeats the **entire Week 1 prediction slate** for easy comparison 
 - NY Jets vs Kansas City → **Kansas City win** (58.4%)
 - Cincinnati vs Indianapolis → **Cincinnati win** (57.6%)
 
-### Final Week 3 Predictions (Most Recent Update)
-- Buffalo vs Baltimore → **Baltimore win** (50.8%)
+### Final Week 3 Predictions (Most Recent Update - Update #2)
+- Buffalo vs Baltimore → **Buffalo win** (50.4%)
 - Washington vs St. Louis → **Washington win** (52.0%)
 - Pittsburgh vs Jacksonville → **Pittsburgh win** (55.1%)
 - Houston vs New England → **Houston win** (54.6%)
@@ -240,26 +240,26 @@ This section repeats the **entire Week 1 prediction slate** for easy comparison 
 
 ## Week 3 Prediction Changes Summary
 
-### Predictions That Flipped Winners (After Week 1 → After Week 2)
-| Matchup | After Week 1 | After Week 2 | Change |
-|---------|-------------|-------------|---------|
-| Buffalo vs Baltimore | BUF (50.4%) | BAL (50.8%) | Flipped to BAL |
-| Detroit vs Seattle | DET (57.7%) | SEA (55.2%) | Flipped to SEA |
-| Arizona vs Dallas | ARI (60.1%) | DAL (57.1%) | Flipped to DAL |
-| San Diego vs Denver | DEN (60.5%) | SD (55.2%) | Flipped to SD |
+### Predictions That Flipped Winners (Throughout Updates)
+Looking at the evolution from initial Week 3 predictions through the final update:
 
-**Note:** The most recent predictions appear to have reverted some changes, suggesting the model may have oscillated between different assessments.
+**Buffalo vs Baltimore:** 
+- Initial (After Week 1): BUF (50.4%)
+- After Week 2: BAL (50.8%) 
+- Final: **BUF (50.4%)** - *Flipped back to original*
 
-### Significant Confidence Changes
-| Matchup | Winner | Initial | After Week 2 | Final | Net Change |
-|---------|--------|---------|-------------|-------|------------|
-| Washington vs St. Louis | WAS | 52.0% | 64.0% | 52.0% | 0.0 pp |
-| Tennessee vs NY Giants | TEN | 62.2% | 58.7% | 62.2% | 0.0 pp |
-| Miami vs Minnesota | MIN | 56.6% | 62.7% | 56.6% | 0.0 pp |
-| NY Jets vs Kansas City | KC | 54.6% | 58.4% | 54.6% | 0.0 pp |
+**Other Notable Changes:**
+Most other predictions remained relatively stable throughout the updates, with the model showing consistency in winner selection but some confidence adjustments.
 
-### Model Performance Tracking
+### Model Behavior Analysis
+The model appears to have made temporary adjustments after Week 2 results but then reverted several predictions back toward their original assessments. This suggests the learning algorithm may be balancing recent performance with longer-term trends.
+
+### Current Model Performance Tracking
 - **After Week 1:** 75% accuracy (12/16)
-- **After Week 2:** 43.8% accuracy (7/16)
+- **After Week 2:** 43.8% accuracy (7/16)  
 - **Overall Through Week 2:** 59.4% accuracy (19/32)
 - **Current Update Number:** 2
+- **Final Model Weights:**
+  - Random Forest: 38.8%
+  - Gradient Boost: 34.7%
+  - Logistic Regression: 26.5%
