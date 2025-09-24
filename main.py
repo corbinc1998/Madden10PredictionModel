@@ -13,6 +13,7 @@ from utils import (
     display_simulation_summary,
     create_test_data
 )
+from text_generator import main_with_selective_output
 
 
 def run_regular_season_predictions():
@@ -281,6 +282,7 @@ def main():
     print("3. Both regular season and single playoff simulation")
     print("4. Monte Carlo playoff simulation (multiple runs)")
     print("5. Test playoff simulation (debug mode)")
+    print("6. Generate text documents instead of console output")
     
     choice = input("Enter your choice (1-5): ").strip()
     
@@ -294,6 +296,8 @@ def main():
         run_monte_carlo_simulation()
     elif choice == "5":
         test_playoff_simulation()
+    elif choice == "6":
+        main_with_selective_output()
     else:
         print("Invalid choice. Please run again and select 1-5.")
 
