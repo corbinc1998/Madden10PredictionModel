@@ -287,11 +287,34 @@ The model appears to have made temporary adjustments after Week 2 results but th
 
 ---
 
+## Week 4 Predictions (After Week 3 Adjustments - Update #3)
+
+- Cleveland vs New Orleans → **Cleveland win** (53.6%)
+- Dallas vs St. Louis → **Dallas win** (57.4%)
+- Houston vs Washington → **Houston win** (59.2%)
+- New England vs Kansas City → **Kansas City win** (53.2%)
+- NY Jets vs Green Bay → **NY Jets win** (54.5%)
+- Detroit vs Buffalo → **Detroit win** (70.2%)
+- Arizona vs Carolina → **Arizona win** (50.1%)
+- San Diego vs Miami → **Miami win** (55.0%)
+- Denver vs Indianapolis → **Denver win** (52.4%)
+- Oakland vs San Francisco → **Oakland win** (55.8%)
+- Jacksonville vs Baltimore → **Jacksonville win** (53.9%)
+- Seattle vs Philadelphia → **Philadelphia win** (57.0%)
+- Chicago vs Minnesota → **Minnesota win** (50.2%)
+- Tampa Bay vs NY Giants → **NY Giants win** (57.9%)
+
+---
+
 ## Model Adjustments After Week 3
+- **Updated Ensemble Weights (estimated):**
+  - Random Forest: ~38.5%
+  - Gradient Boost: ~34.5%
+  - Logistic Regression: ~27.0%
 - **Total Predictions Made:** 46
 - **Correct Predictions:** 28
 - **Overall Accuracy Through Week 3:** 60.9%
-- **Week 3 Performance:** 64.3% (9/14) - *Improvement from Week 2*
+- **Current Update Number:** 3
 
 ### Performance Summary by Week
 - **Week 1:** 75% accuracy (12/16)
