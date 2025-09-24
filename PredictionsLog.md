@@ -220,7 +220,8 @@ This section repeats the **entire Week 1 prediction slate** for easy comparison 
 - NY Jets vs Kansas City → **Kansas City win** (58.4%)
 - Cincinnati vs Indianapolis → **Cincinnati win** (57.6%)
 
-### Final Week 3 Predictions (Most Recent Update - Update #2)
+### Final Week 3 Predictions (After Week 2 Adjustments - Update #2)
+
 - Buffalo vs Baltimore → **Buffalo win** (50.4%)
 - Washington vs St. Louis → **Washington win** (52.0%)
 - Pittsburgh vs Jacksonville → **Pittsburgh win** (55.1%)
@@ -254,12 +255,46 @@ Most other predictions remained relatively stable throughout the updates, with t
 ### Model Behavior Analysis
 The model appears to have made temporary adjustments after Week 2 results but then reverted several predictions back toward their original assessments. This suggests the learning algorithm may be balancing recent performance with longer-term trends.
 
-### Current Model Performance Tracking
-- **After Week 1:** 75% accuracy (12/16)
-- **After Week 2:** 43.8% accuracy (7/16)  
-- **Overall Through Week 2:** 59.4% accuracy (19/32)
-- **Current Update Number:** 2
-- **Final Model Weights:**
-  - Random Forest: 38.8%
-  - Gradient Boost: 34.7%
-  - Logistic Regression: 26.5%
+---
+
+## All Week 3 Results (Season 6)
+**Games Evaluated:** 14  
+**Correct Predictions:** 9  
+**Accuracy:** 64.3%
+
+### Correct Predictions
+- Washington (52.0%) ✅ beat St. Louis (24-21)
+- Pittsburgh (55.1%) ✅ beat Jacksonville (30-27)
+- Houston (54.6%) ✅ beat New England (31-12)
+- Tennessee (62.2%) ✅ beat NY Giants (42-35)
+- San Francisco (50.4%) ✅ beat Philadelphia (26-14)
+- Denver (60.5%) ✅ beat San Diego (41-28)
+- Detroit (57.7%) ✅ beat Seattle (33-10)
+- Dallas (via upset) ✅ beat Arizona (38-24)
+- NY Jets (via upset) ✅ beat Kansas City (35-13)
+
+### Incorrect Predictions
+- ❌ Buffalo (50.4%) lost to Baltimore (32-35)
+- ❌ Atlanta (61.6%) lost to Tampa Bay (34-37)
+- ❌ Green Bay (57.3%) lost to Chicago (30-33)
+- ❌ Minnesota (56.6%) lost to Miami (24-48)
+- ❌ Cincinnati (60.9%) lost to Indianapolis (17-23)
+
+### Notable Upsets
+- **Dallas over Arizona:** Predicted ARI (60.1%), actual DAL win (38-24)
+- **NY Jets over Kansas City:** Predicted KC (54.6%), actual NYJ win (35-13)
+- **Miami over Minnesota:** Predicted MIN (56.6%), actual MIA win (48-24) - *Blowout upset*
+
+---
+
+## Model Adjustments After Week 3
+- **Total Predictions Made:** 46
+- **Correct Predictions:** 28
+- **Overall Accuracy Through Week 3:** 60.9%
+- **Week 3 Performance:** 64.3% (9/14) - *Improvement from Week 2*
+
+### Performance Summary by Week
+- **Week 1:** 75% accuracy (12/16)
+- **Week 2:** 43.8% accuracy (7/16)
+- **Week 3:** 64.3% accuracy (9/14)
+- **Overall:** 60.9% accuracy (28/46)
