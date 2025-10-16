@@ -1,17 +1,17 @@
 {
   "model_weights": {
-    "random_forest": 0.35522346694943324,
-    "gradient_boost": 0.3350186335339938,
-    "logistic_regression": 0.30975789951657295
+    "random_forest": 0.35228936485247153,
+    "gradient_boost": 0.33473345198999244,
+    "logistic_regression": 0.3129771831575361
   },
   "feature_weights": {},
   "learning_rate": 0.1,
   "min_games_for_update": 5,
   "performance_window": 20,
-  "last_update": "2025-10-15T21:13:57.257997",
-  "total_predictions": 160,
-  "correct_predictions": 75,
-  "update_counter": 11,
+  "last_update": "2025-10-16T18:29:20.399467",
+  "total_predictions": 176,
+  "correct_predictions": 83,
+  "update_counter": 12,
   "prediction_files": [
     "predictions/after_week_2_predictions.json",
     "predictions/after_week_3_predictions.json",
@@ -22,6 +22,7 @@
     "predictions/after_week_8_predictions.json",
     "predictions/after_week_9_predictions.json",
     "predictions/after_week_10_predictions.json",
-    "predictions/after_week_11_predictions.json"
+    "predictions/after_week_11_predictions.json",
+    "predictions/after_week_12_predictions.json"
   ]
 }
